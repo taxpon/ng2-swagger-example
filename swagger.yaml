@@ -1,0 +1,60 @@
+swagger: '2.0'
+info:
+  title: Book Store
+  description: API for Book Store
+  version: 1.0.0
+host: localhost:3000
+basePath: /api/v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+  /books:
+    get:
+      tags: [Books]
+      operationId: getBooksList
+      responses:
+        200:
+          description: success
+          schema:
+            title: books
+            type: array
+            items:
+              $ref: '#/definitions/Book'
+            example: ['#/definitions/Book', '#/definitions/Book']
+
+  /books/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: book id
+        required: true
+        type: integer
+        format: int64
+    get:
+      tags: [Books]
+      operationId: getBookById
+      responses:
+        200:
+          description: success
+          schema:
+            title: book
+            $ref: '#/definitions/Book'
+
+definitions:
+  Book:
+    type: object
+    properties:
+      id:
+        type: integer
+        example: 1
+      title:
+        type: string
+        example: Hello, Angular2
+      author:
+        type: string
+        example: john doe
